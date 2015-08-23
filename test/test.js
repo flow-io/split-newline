@@ -21,4 +21,12 @@ describe( 'flow-split-newline', function tests() {
 		expect( Stream ).to.be.a( 'function' );
 	});
 
+	it( 'should export a function to create a stream in object mode', function test() {
+		expect( Stream.objectMode ).to.be.a( 'function' );
+	});
+
+	it( 'should export a stream factory', function test() {
+		expect( Stream.factory ).to.be.a( 'function' );
+	});
+
 });
