@@ -37,7 +37,7 @@ The function accepts the following `options`:
 *	__objectMode__: `boolean` which specifies whether a [stream](https://nodejs.org/api/stream.html) should operate in object mode. Default: `false`.
 * 	__encoding__: specifies how `Buffer` objects should be decoded to `strings`. Default: `null`.
 *	__highWaterMark__: specifies the `Buffer` level at which `write()` calls start returning `false`. Default: `16` (16kb).
-*	__allowHalfOpen__: specifies whether the stream should remain open even if one side ends. Default: `false`.
+*	__allowHalfOpen__: specifies whether a [stream](https://nodejs.org/api/stream.html) should remain open even if one side ends. Default: `false`.
 *	__writableObjectMode__: specifies whether the writable side should be in object mode. Default: `false`.
 
 To set [stream](https://nodejs.org/api/stream.html) `options`,
