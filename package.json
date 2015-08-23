@@ -18,6 +18,9 @@
     "codecov": "istanbul cover ./node_modules/.bin/_mocha --dir ./reports/codecov/coverage --report lcovonly -- -R spec && cat ./reports/codecov/coverage/lcov.info | codecov && rm -rf ./reports/codecov"
   },
   "main": "./lib",
+  "bin": {
+    "flow-split-newline": "./bin/cli"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/flow-io/split-newline.git"

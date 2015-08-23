@@ -54,7 +54,7 @@ var opts = {
 var tStream = stream( opts );
 ```
 
-#### stream.factory( options )
+#### stream.factory( [options] )
 
 Creates a reusable [stream](https://nodejs.org/api/stream.html) factory. The factory method ensures [streams](https://nodejs.org/api/stream.html) are configured identically by using the same set of provided `options`.
 
