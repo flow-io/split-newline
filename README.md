@@ -105,10 +105,12 @@ var toString = through2( function onData( chunk, enc, clbk ) {
 	clbk();
 });
 
-// Create a new stream and pipe to stdout...
+// Create a new newline stream:
 var tStream = stream({
 	'encoding': 'base64'
 });
+
+// Create a stream pipeline:
 tStream
 	.pipe( toString )
 	.pipe( process.stdout );
