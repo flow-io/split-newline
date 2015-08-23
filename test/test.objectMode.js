@@ -22,13 +22,43 @@ describe( 'object mode', function tests() {
 		expect( objectMode ).to.be.a( 'function' );
 	});
 
+	it( 'should throw an error if provided an options argument which is not an object', function test() {
+		var values = [
+			'5',
+			5,
+			true,
+			undefined,
+			null,
+			NaN,
+			function(){},
+			[]
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			expect( badValue( values[i] ) ).to.throw( Error );
+		}
+		function badValue( value ) {
+			return function() {
+				objectMode( value );
+			};
+		}
+	});
+
 	it( 'should return a stream', function test() {
 		var tStream = objectMode();
 		assert.isTrue( tStream instanceof Stream );
 	});
 
 	it( 'should return a stream which allows writing objects', function test() {
-		var tStream = objectMode({
+		var tStream;
+
+		tStream = objectMode();
+		tStream.write( new String( 'beep' ) );
+		tStream.end();
+		assert.ok( true );
+
+		// Attempt to override should not work...
+		tStream = objectMode({
 			// this should be overridden...
 			'objectMode': false
 		});

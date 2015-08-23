@@ -22,6 +22,32 @@ describe( 'factory', function tests() {
 		expect( factory ).to.be.a( 'function' );
 	});
 
+	it( 'should throw an error if provided an options argument which is not an object', function test() {
+		var createStream,
+			values;
+
+		values = [
+			'5',
+			5,
+			true,
+			undefined,
+			null,
+			NaN,
+			function(){},
+			[]
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			expect( badValue( values[i] ) ).to.throw( Error );
+		}
+		function badValue( value ) {
+			return function() {
+				createStream = factory( value );
+				createStream();
+			};
+		}
+	});
+
 	it( 'should return a function', function test() {
 		var createStream = factory();
 		expect( createStream ).to.be.a( 'function' );
