@@ -90,11 +90,6 @@ if ( args.encoding ) {
 	opts.encoding = args.encoding;
 }
 
-// decodeStrings: (default: true)
-if ( args[ 'no-decodestrings' ] ) {
-	opts.decodeStrings = false;
-}
-
 // allowHalfOpen: (default: false)
 if ( args.allowhalfopen ) {
 	opts.allowHalfOpen = true;
@@ -103,11 +98,6 @@ if ( args.allowhalfopen ) {
 // objectMode: (default: false)
 if ( args.objectmode ) {
 	opts.objectMode = true;
-}
-
-// readableObjectMode: (default: false)
-if ( args.readableObjectMode ) {
-	opts.readableObjectMode = true;
 }
 
 // writableObjectMode: (default: false)

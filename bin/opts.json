@@ -7,8 +7,6 @@
 		"version",
 		"objectmode",
 		"allowhalfopen",
-		"no-decodestrings",
-		"readableobjectmode",
 		"writableobjectmode"
 	],
 	"alias": {
@@ -29,12 +27,6 @@
 		],
 		"allowhalfopen": [
 			"aho"
-		],
-		"no-decodestrings": [
-			"nds"
-		],
-		"readableobjectmode": [
-			"rom"
 		],
 		"writableobjectmode": [
 			"wom"

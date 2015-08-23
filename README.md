@@ -36,10 +36,8 @@ The function accepts the following `options`:
 
 *	__objectMode__: `boolean` which specifies whether a [stream](https://nodejs.org/api/stream.html) should operate in object mode. Default: `false`.
 * 	__encoding__: specifies how `Buffer` objects should be decoded to `strings`. Default: `null`.
-*	__decodeStrings__: `boolean` which specifies whether written `strings` should be decoded into `Buffer` objects. Default: `true`.
 *	__highWaterMark__: specifies the `Buffer` level at which `write()` calls start returning `false`. Default: `16` (16kb).
 *	__allowHalfOpen__: specifies whether the stream should remain open even if one side ends. Default: `false`.
-*	__readableObjectMode__: specifies whether the readable side should be in object mode. Default: `false`.
 *	__writableObjectMode__: specifies whether the writable side should be in object mode. Default: `false`.
 
 To set [stream](https://nodejs.org/api/stream.html) `options`,
@@ -48,11 +46,9 @@ To set [stream](https://nodejs.org/api/stream.html) `options`,
 var opts = {
 	'objectMode': true,
 	'encoding': 'utf8',
-	'decodeStrings': false,
 	'highWaterMark': 64,
 	'allowHalfOpen': true,
-	'readableObjectMode': true,
-	'writableObjectMode': false // overridden by `objectMode` option as `objectMode=true`
+	'writableObjectMode': false // overridden by `objectMode` option when `objectMode=true`
 };
 
 var tStream = stream( opts );
@@ -66,7 +62,6 @@ Returns a reusable [stream](https://nodejs.org/api/stream.html) factory. The fac
 var opts = {
 	'objectMode': true,
 	'encoding': 'utf8',
-	'decodeStrings': false,
 	'highWaterMark': 64	
 };
 
@@ -98,16 +93,36 @@ tStream.end();
 ## Examples
 
 ``` javascript
-var stream = require( 'flow-split-newline' );
+var stream = require( 'flow-split-newline' ),
+	through2 = require( 'through2' );
+
+// Create a stream to convert `base64` newline data to UTF-8...
+var toString = through2( function onData( chunk, enc, clbk ) {
+	chunk = chunk.toString();
+	chunk = new Buffer( chunk, 'base64' );
+	chunk = chunk.toString();
+	this.push( chunk + '\n' );
+	clbk();
+});
 
 // Create a new stream and pipe to stdout...
-var tStream = stream();
-tStream.pipe( process.stdout );
+var tStream = stream({
+	'encoding': 'base64'
+});
+tStream
+	.pipe( toString )
+	.pipe( process.stdout );
 
 // Write values to the stream...
-tStream.write( '|' );
-for ( var i = 0; i < 1000; i++ ) {
-	tStream.write( i+'|\n'+(i*2)+'|\n'  );
+var str;
+for ( var i = 0; i < 10; i++ ) {
+	str = '\n';
+	str += i + '\n';
+	str += (i*2) + '\n';
+	str += '=====' + '\r';
+	str = new Buffer( str );
+	str = str.toString( 'base64' );
+	tStream.write( str, 'base64'  );
 }
 tStream.end();
 ```
@@ -143,13 +158,9 @@ Options:
   -hwm, --highwatermark [hwm]  Specify how much data can be buffered into memory
                                before applying back pressure. Default: 16KB.
   -enc, --encoding [encoding]  String encoding.
-  -nds, --no-decodestrings     Prevent strings from being converted into buffers
-                               before streaming to destination. Default: false.
   -aho, --allowhalfopen        Keep the stream open if either the readable or
                                writable side ends. Default: false.
   -om,  --objectmode           Write any value rather than only buffers and strings.
-                               Default: false.
-  -rom, --readableobjectmode   Read values as objects rather than buffers.
                                Default: false.
   -wom, --writableobjectmode   Write values as objects rather than buffers.
                                Default: false.

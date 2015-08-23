@@ -35,7 +35,11 @@
     "crlf",
     "lf",
     "delimited",
-    "delimiter"
+    "delimiter",
+    "split",
+    "splits",
+    "lines",
+    "line-by-line"
   ],
   "bugs": {
     "url": "https://github.com/flow-io/split-newline/issues"
@@ -56,7 +60,8 @@
     "istanbul": "^0.3.0",
     "jshint": "2.x.x",
     "jshint-stylish": "2.x.x",
-    "mocha": "2.x.x"
+    "mocha": "2.x.x",
+    "through2": "^2.0.0"
   },
   "license": "MIT"
 }
