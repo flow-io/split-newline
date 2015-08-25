@@ -135,65 +135,7 @@ To run the example code from the top-level application directory,
 $ node ./examples/index.js
 ```
 
----
-## CLI
 
-
-### Installation
-
-To use the module as a general utility, install the module globally
-
-``` bash
-$ npm install -g flow-split-newline
-```
-
-
-### Usage
-
-``` bash
-Usage: flow-split-newline [options]
-
-Options:
-
-  -h,   --help                 Print this message.
-  -V,   --version              Print the package version.
-  -hwm, --highwatermark [hwm]  Specify how much data can be buffered into memory
-                               before applying back pressure. Default: 16KB.
-  -enc, --encoding [encoding]  String encoding.
-  -aho, --allowhalfopen        Keep the stream open if either the readable or
-                               writable side ends. Default: false.
-  -om,  --objectmode           Write any value rather than only buffers and strings.
-                               Default: false.
-  -wom, --writableobjectmode   Write values as objects rather than buffers.
-                               Default: false.
-```
-
-The `flow-split-newline` command is available as a [standard stream](http://en.wikipedia.org/wiki/Pipeline_%28Unix%29).
-
-``` bash
-$ <stdout> | flow-split-newline | <stdin>
-``` 
-
-
-### Examples
-
-``` bash
-$ echo $'1\n2\n3' | flow-split-newline
-```
-
-For local installations, modify the above command to point to the local installation directory; e.g., 
-
-``` bash
-$ echo $'a\nb\nc' | ./node_modules/.bin/flow-split-newline
-```
-
-Or, if you have cloned this repository and run `npm install`, modify the command to point to the executable; e.g., 
-
-``` bash
-$ echo $'beep\nboop\nbop' | node ./bin/cli
-```
-
----
 ## Tests
 
 ### Unit
